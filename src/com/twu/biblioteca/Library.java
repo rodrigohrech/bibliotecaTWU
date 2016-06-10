@@ -1,7 +1,6 @@
 package com.twu.biblioteca;
 
-import java.awt.print.Book;
-import java.util.ArrayList;
+import com.twu.biblioteca.Book;
 import java.util.List;
 
 /**
@@ -17,18 +16,8 @@ public class Library {
     }
 
     public void initCatalogue() {
-        catalogue = new ArrayList<Book>();
-
-        Book book = new Book();
-        Book book1 = new Book();
-        Book book2 = new Book();
-        Book book3 = new Book();
-        Book book4 = new Book();
-
-        catalogue.add(book);
-        catalogue.add(book1);
-        catalogue.add(book2);
-        catalogue.add(book3);
-        catalogue.add(book4);
+        catalogue =  CatalogueFactory.generate();
     }
+
+
 }
