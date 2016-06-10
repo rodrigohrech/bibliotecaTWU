@@ -3,6 +3,8 @@ package com.twu.biblioteca;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,12 +26,16 @@ public class CatalogueFactory {
 
     public static Book createBook() {
         Book book = new Book();
-        book.setName("Book " + nextId());
 
         if(catalogue != null)
             book.setID(nextId());
         else
             book.setID(getRandomInt());
+
+        book.setName("Book " + book.getID());
+        book.setYearPublished(new Date());
+        book.setAuthor("Author "+ book.getID());
+
 
         return book;
     }
