@@ -1,65 +1,37 @@
 package com.twu.biblioteca;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class BibliotecaApp {
 
-    private static String tab = "      ";
+    public static final String MAIN_MENU = "0";
+    public static final String QUIT_COMMAND = "Quit";
+    private static Menu menu = new Menu();;
+
 
     public static void main(String[] args) {
+        String input = MAIN_MENU;
 
-        printWelcomeMessage();
-
-        printCatalogueList();
-
-        System.out.print("\nWhat book do you want? (Number Only) ");
-        int option =  readInteger();
-
-    }
-
-    private static int readInteger() {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        try{
-            return Integer.parseInt(br.readLine());
-        }catch(NumberFormatException nfe){
-            System.err.println("Invalid Format!");
-            return -1;
-        } catch (IOException e) {
-            System.out.println("Invalid Input");
-            return -1;
+        while(input != QUIT_COMMAND) {
+            try {
+                menu.executeOption(Integer.parseInt(input));
+            } catch (InvalidOptionException e) {
+                System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid option "
+                                        + e.getMessage().toLowerCase()
+                                        + ". Select a valid option!");
+            }
+            input = readInput();
         }
+
     }
 
-    private static void printCatalogueList() {
-        System.out.println("\nCatalogue List:\n");
-        printHorizontalLine();
-        System.out.println(tab+"| ID | Name  | Author | Year Published");
-        printHorizontalLine();
-
-        Library library = new Library();
-
-        library.initCatalogue();
-
-        List<Book> catalogue = library.getAllBooks();
-
-        for (Book book : catalogue) {
-            System.out.println(tab +    "| " + book.getID()
-                                    +  " | " + book.getName()
-                                    +  " | " + book.getAuthor()
-                                    +  " | " + book.getYearPublished()
-                                    +  " | ");
-        }
-        printHorizontalLine();
+    public static String readInput() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
-    private static void printHorizontalLine() {
-        System.out.println(tab+"--------------------------------------");
-    }
 
-    private static void printWelcomeMessage() {
-        System.out.println("------------ Welcome to MyBib! ------------");
-    }
 }

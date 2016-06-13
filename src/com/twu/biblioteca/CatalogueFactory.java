@@ -17,7 +17,7 @@ public class CatalogueFactory {
     public static List<Book> generate() {
         catalogue = new ArrayList<Book>();
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             catalogue.add(createBook());
         }
 
@@ -25,7 +25,7 @@ public class CatalogueFactory {
     }
 
     public static Book createBook() {
-        Book book = new Book();
+        Book book = new Book(true);
 
         if(catalogue != null)
             book.setID(nextId());

@@ -10,6 +10,11 @@ public class Book {
     private int ID;
     private Date yearPublished;
     private String author;
+    private boolean available;
+
+    public Book(boolean available) {
+        this.available = available;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -41,5 +46,13 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 }
