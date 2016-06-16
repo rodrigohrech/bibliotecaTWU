@@ -9,8 +9,10 @@ public class Menu {
 
     private static final String tab = "      ";
     public static final int LIST_BOOKS_OPTION = 1;
-    public static final int RETURN_BOOK_OPTION = 2;
+    private static final int LIST_MOVIES_OPTION = 2;
+    public static final int RETURN_BOOK_OPTION = 3;
     public static final int MAIN_MENU = 0;
+
     private int positionMenu;
     private Catalogue catalogue;
 
@@ -24,11 +26,16 @@ public class Menu {
 
         switch (optionNumber) {
             case LIST_BOOKS_OPTION:
-                System.out.println(Message.getCatalogueWindow(catalogue.getAvailableBooks()));
+                System.out.println(Message.getCatalogueBooksWindow(catalogue.getAvailableItems()));
                 System.out.println(checkOutBookOption(readInput()));
                 executeOption(MAIN_MENU);
                 break;
 
+            case LIST_MOVIES_OPTION:
+                System.out.println(Message.getCatalogueMoviesWindow(catalogue.getAvailableItems()));
+                System.out.println(checkOutMovieOption(readInput()));
+                executeOption(MAIN_MENU);
+                break;
             case RETURN_BOOK_OPTION:
                 System.out.println("Write book's name to return: ");
                 System.out.println(returnBookOption(readInput()));
@@ -47,8 +54,12 @@ public class Menu {
 
     }
 
+    private boolean checkOutMovieOption(String name) {
+        return false;
+    }
+
     public String returnBookOption(String name) {
-        return Message.getReturnBookMessage(catalogue.returnBook(name));
+        return Message.getReturnBookMessage(catalogue.returnItem(name));
     }
 
 

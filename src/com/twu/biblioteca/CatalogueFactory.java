@@ -3,47 +3,40 @@ package com.twu.biblioteca;
 
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by rrech on 6/10/16.
  */
-public class CatalogueFactory {
+public abstract class CatalogueFactory<T extends Item> {
 
-    private static List<Book> catalogue;
 
-    public static List<Book> generate() {
-        catalogue = new ArrayList<Book>();
+    private List<T> catalogue;
+
+    public List<T> getCatalogue() {
+        return catalogue;
+    }
+
+    public List<T> generate() {
+        catalogue = new ArrayList<T>();
 
         for (int i = 0; i < 5; i++) {
-            catalogue.add(createBook());
+            catalogue.add((T) createItem());
         }
 
         return catalogue;
     }
 
-    public static Book createBook() {
-        Book book = new Book(true);
+    public abstract T createItem();
 
-        if(catalogue != null)
-            book.setID(nextId());
-        else
-            book.setID(getRandomInt());
-
-        book.setName("Book " + book.getID());
-        book.setYearPublished(new Date());
-        book.setAuthor("Author "+ book.getID());
-
-        return book;
-    }
-
-    private static int nextId() {
+    public int nextId() {
         return catalogue.size()+1;
     }
 
-    private static int getRandomInt() {
+    public   int getRandomInt() {
         return Math.round((float) Math.random()*10);
     }
+
 }

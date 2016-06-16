@@ -10,7 +10,8 @@ public class BibliotecaApp {
     private static Menu menu;
 
     public BibliotecaApp() {
-        Catalogue catalogue = new Catalogue();
+        CatalogueBookFactory catalogueBookFactory = new CatalogueBookFactory();
+        Catalogue<Book> catalogue = new Catalogue<Book>(catalogueBookFactory);
         this.menu = new Menu(catalogue);
     }
 

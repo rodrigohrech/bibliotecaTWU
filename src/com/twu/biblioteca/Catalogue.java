@@ -6,57 +6,60 @@ import java.util.List;
 /**
  * Created by rrech on 6/12/16.
  */
-public class Catalogue {
+public class Catalogue <T extends Item>  {
 
-    private List<Book> checkedOutBooks;
-    private List<Book> availableBooks;
+    private CatalogueFactory<T> catalogueFactory;
+    private List<T> checkedOutItems;
+    private List<T> availableItems;
 
+    public Catalogue(CatalogueFactory<T> catalogueFactory) {
+        this.catalogueFactory = catalogueFactory;
+    }
 
     public void initCatalogue() {
-        availableBooks =  CatalogueFactory.generate();
-        checkedOutBooks = new ArrayList<Book>();
+        availableItems =  catalogueFactory.generate();
+        checkedOutItems = new ArrayList<T>();
     }
 
 
-    public List<Book> getAvailableBooks() {
-        return availableBooks;
+    public List<T> getAvailableItems() {
+        return availableItems;
     }
-
 
     public boolean checkOut(String name) {
-        Book book = getBookByName(name);
-        if(availableBooks.remove(book)) {
-            checkedOutBooks.add(book);
-            book.setAvailable(false);
+        T item = getItemByName(name);
+        if(availableItems.remove(item)) {
+            checkedOutItems.add(item);
+            item.setAvailable(false);
             return true;
         } else {
             return false;
         }
     }
 
-    public List<Book> getCheckedOutBooks() {
-        return checkedOutBooks;
+    public List<T> getCheckedOutItems() {
+        return checkedOutItems;
     }
 
-    public List<Book> getAllBooks() {
-        List<Book> allBooks = new ArrayList<Book>();
-        allBooks.addAll(availableBooks);
-        allBooks.addAll(checkedOutBooks);
-        return allBooks;
+    public List<T> getAllItems() {
+        List<T> allItems = new ArrayList<T>();
+        allItems.addAll(availableItems);
+        allItems.addAll(checkedOutItems);
+        return allItems;
     }
 
-    public Book getBookByName(String name) {
-        for (Book book : getAllBooks()) {
-            if(book.getName().contentEquals(name)) return book;
+    public T getItemByName(String name) {
+        for (T item : getAllItems()) {
+            if(item.getName().contentEquals(name)) return item;
         }
         return null;
     }
 
-    public boolean returnBook(String name) {
-        Book book = getBookByName(name);
-        if(checkedOutBooks.remove(book)) {
-            availableBooks.add(book);
-            book.setAvailable(true);
+    public boolean returnItem(String name) {
+        T item = getItemByName(name);
+        if(checkedOutItems.remove(item)) {
+            availableItems.add(item);
+            item.setAvailable(true);
             return true;
         } else {
             return false;
