@@ -23,7 +23,8 @@ public class Catalogue {
     }
 
 
-    public boolean checkOut(Book book) {
+    public boolean checkOut(String name) {
+        Book book = getBookByName(name);
         if(availableBooks.remove(book)) {
             checkedOutBooks.add(book);
             book.setAvailable(false);
@@ -51,7 +52,8 @@ public class Catalogue {
         return null;
     }
 
-    public boolean returnBook(Book book) {
+    public boolean returnBook(String name) {
+        Book book = getBookByName(name);
         if(checkedOutBooks.remove(book)) {
             availableBooks.add(book);
             book.setAvailable(true);
@@ -60,4 +62,5 @@ public class Catalogue {
             return false;
         }
     }
+
 }

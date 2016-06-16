@@ -24,7 +24,7 @@ public class CatalogueTest {
     public void shouldRemoveBookFromAvailableWhenCheckOut() throws Exception {
         availableBooks = catalogue.getAvailableBooks();
         int numberBooks = availableBooks.size();
-        catalogue.checkOut(availableBooks.get(0));
+        catalogue.checkOut(availableBooks.get(0).getName());
         availableBooks = catalogue.getAvailableBooks();
         assertNotEquals(numberBooks,availableBooks.size());
 
@@ -39,7 +39,7 @@ public class CatalogueTest {
     private Book checkOutFirstBookFromAvailableList() {
         availableBooks = catalogue.getAvailableBooks();
         Book bookTest = availableBooks.get(0);
-        catalogue.checkOut(bookTest);
+        catalogue.checkOut(bookTest.getName());
         return bookTest;
     }
 
@@ -67,7 +67,7 @@ public class CatalogueTest {
     public void shouldMoveBookFromCheckedOutListToAvailableListWhenReturn() throws Exception {
         checkOutFirstBookFromAvailableList();
         Book targetBook = catalogue.getCheckedOutBooks().get(0);
-        catalogue.returnBook(targetBook);
+        catalogue.returnBook(targetBook.getName());
         assertFalse(catalogue.getCheckedOutBooks().contains(targetBook));
         assertTrue(catalogue.getAvailableBooks().contains(targetBook));
     }
@@ -75,7 +75,7 @@ public class CatalogueTest {
     @Test
     public void shouldChangeStatusAvaibleWhenBookReturned() throws Exception {
         Book targetBook = checkOutFirstBookFromAvailableList();
-        catalogue.returnBook(targetBook);
+        catalogue.returnBook(targetBook.getName());
         assertTrue(targetBook.isAvailable());
     }
 }

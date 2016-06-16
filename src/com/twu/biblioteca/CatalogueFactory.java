@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class CatalogueFactory {
 
-    private static ArrayList<Book> catalogue;
+    private static List<Book> catalogue;
 
     public static List<Book> generate() {
         catalogue = new ArrayList<Book>();
@@ -35,7 +35,6 @@ public class CatalogueFactory {
         book.setName("Book " + book.getID());
         book.setYearPublished(new Date());
         book.setAuthor("Author "+ book.getID());
-
 
         return book;
     }
