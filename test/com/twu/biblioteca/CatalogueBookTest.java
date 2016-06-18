@@ -11,14 +11,14 @@ import static org.junit.Assert.*;
 public class CatalogueBookTest {
 
 
-    private Catalogue<Book> catalogue;
+    private CatalogueBook catalogue;
     private List<Book> availableBooks;
     private List<Movie> availableMovies;
 
     @Before
     public void setUp(){
         CatalogueBookFactory catalogueBookFactory = new CatalogueBookFactory();
-        catalogue = new Catalogue<Book>(catalogueBookFactory);
+        catalogue = new CatalogueBook(catalogueBookFactory);
         catalogue.initCatalogue();
     }
 

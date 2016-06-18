@@ -5,21 +5,23 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
 
-    public static final String MAIN_MENU = "0";
-    public static final String QUIT_COMMAND = "Quit";
+    public static final String QUIT_COMMAND = "quit";
     private static Menu menu;
+    private static String input;
 
-    public BibliotecaApp() {
-        CatalogueBookFactory catalogueBookFactory = new CatalogueBookFactory();
-        Catalogue<Book> catalogue = new Catalogue<Book>(catalogueBookFactory);
-        this.menu = new Menu(catalogue);
+    public static void initBibliotecaApp() {
+        CatalogueBook catalogueBook = new CatalogueBook(new CatalogueBookFactory());
+        CatalogueMovie catalogueMovie = new CatalogueMovie(new CatalogueMovieFactory());
+        Credential credential = new Credential(new UserFactory());
+        menu = new Menu(catalogueBook,catalogueMovie, credential);
+        input = Integer.toString(Menu.LOGIN);
     }
 
     public static void main(String[] args) {
-        String input = MAIN_MENU;
-        int option;
 
-        while(input != QUIT_COMMAND) {
+        initBibliotecaApp();
+
+        while(input.toLowerCase().compareTo(QUIT_COMMAND) != 0) {
             try {
                 menu.executeOption(Integer.parseInt(input));
             } catch (InvalidOptionException e) {

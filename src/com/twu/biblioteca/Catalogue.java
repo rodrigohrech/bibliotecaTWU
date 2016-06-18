@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by rrech on 6/12/16.
  */
-public class Catalogue <T extends Item>  {
+public abstract class Catalogue <T extends Item>  {
 
     private CatalogueFactory<T> catalogueFactory;
     private List<T> checkedOutItems;

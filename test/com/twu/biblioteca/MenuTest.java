@@ -16,14 +16,17 @@ public class MenuTest {
     public static final boolean IS_SUCCESS = true;
     public static final boolean IS_FAILURE = false;
     private Menu menu;
+
     @Before
     public void setUp() {
-        Catalogue catalogue = mock(Catalogue.class);
-        when(catalogue.checkOut(BOOK_AVAILABLE)).thenReturn(IS_SUCCESS);
-        when(catalogue.checkOut(BOOK_UNAVAILABLE)).thenReturn(IS_FAILURE);
-        when(catalogue.returnItem(BOOK_UNAVAILABLE)).thenReturn(IS_SUCCESS);
-        when((catalogue.returnItem(BOOK_AVAILABLE))).thenReturn(IS_FAILURE);
-        menu = new Menu(catalogue);
+        CatalogueBook catalogueBook = mock(CatalogueBook.class);
+        CatalogueMovie catalogueMovie = mock(CatalogueMovie.class);
+        Credential credential= new Credential(new UserFactory());
+        when(catalogueBook.checkOut(BOOK_AVAILABLE)).thenReturn(IS_SUCCESS);
+        when(catalogueBook.checkOut(BOOK_UNAVAILABLE)).thenReturn(IS_FAILURE);
+        when(catalogueBook.returnItem(BOOK_UNAVAILABLE)).thenReturn(IS_SUCCESS);
+        when((catalogueBook.returnItem(BOOK_AVAILABLE))).thenReturn(IS_FAILURE);
+        menu = new Menu(catalogueBook,catalogueMovie,credential);
     }
 
 
@@ -49,5 +52,8 @@ public class MenuTest {
         assertEquals(Message.getReturnBookMessage(IS_FAILURE), menu.returnBookOption(BOOK_AVAILABLE));
     }
 
+    @Test
+    public void should() throws Exception {
 
+    }
 }
